@@ -1,0 +1,5 @@
+= Wi-Fi Occupancy Sensor
+
+The goal of this project is to create an enchanced occupancy sensor for HacDC. The idea is that by monitoring DHCP requests on the Wi-Fi network we can determine when people are in the space, approximately how many people may be in the space, and possibly even which people are in the space.
+
+It is currently being developed and run on a Raspberry Pi Model B+.
