@@ -1,3 +1,39 @@
 #!/usr/bin/env bash
 
-true
+# Arguments: <add|del> <MAC> <IP> [host]
+
+set -e
+
+LEASE_DIR="/run/shm/leases"
+
+[ -d "${LEASE_DIR}" ] || mkdir -p "${LEASE_DIR}"
+
+MAC="${2}"
+IP="${3}"
+HOST="${4:-unknown}"
+
+if [ -z "${MAC}" -o -z "${IP}" ]; then
+	logger -is "Malformed arguments (1): ${@}"
+fi
+
+add(){
+	printf "${IP}\n${HOST}\n" > "${LEASE_DIR}/${MAC}"
+	logger -is "DHCP ADD: ${MAC} ${IP} ${HOST}"
+}
+
+del(){
+	rm -f "${LEASE_DIR}/${MAC}"
+	logger -is "DHCP DEL: ${MAC} ${IP} ${HOST}"
+}
+
+case "${1}" in
+	"add")
+		add
+		;;
+	"del")
+		del
+		;;
+	*)
+		logger -is "Malformed arguments (2): ${@}"
+esac
+
