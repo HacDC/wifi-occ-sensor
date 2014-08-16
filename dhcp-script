@@ -10,7 +10,7 @@ LEASE_DIR="/run/shm/leases"
 
 MAC="${2}"
 IP="${3}"
-HOST="${4:-unknown}"
+HOST="${4}"
 
 if [ -z "${MAC}" -o -z "${IP}" ]; then
 	logger -is "Malformed arguments (1): ${@}"
@@ -27,7 +27,7 @@ del(){
 }
 
 case "${1}" in
-	"add")
+	"add"|"old")
 		add
 		;;
 	"del")
