@@ -1,0 +1,2 @@
+ln -s /home/pi/wifi-occupancy-sensor/dnsmasq-dhcp-server.conf /etc/dnsmasq.d/
+mkdir -p /run/shm/leases
